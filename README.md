@@ -1,5 +1,8 @@
 # Generador de Reportes de Imagenología
 
+[![Ver Aplicación en Línea](https://img.shields.io/badge/▷_Abrir_Aplicación-En_Línea-10b981?style=for-the-badge)](https://carint.github.io/registro-diario-imagenologia/)
+
+
 ![Vista previa del Generador](screenshot.png)
 
 > **Herramienta web autónoma para la creación, tabulación e impresión del registro diario de pacientes del Departamento de Imagenología del Hospital Dr. Juan Manuel Gálvez.**

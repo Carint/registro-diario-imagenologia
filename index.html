@@ -427,14 +427,24 @@
                     <label for="chkMayusculas" style="margin: 0; cursor: pointer;">Texto en MAYÚSCULAS</label>
                 </div>
 
-                <button onclick="agregarFila()" style="margin-top: 12px;">+ Agregar Paciente</button>
+                <div style="display: flex; gap: 10px; margin-top: 12px;">
+                    <button id="btnAgregar" onclick="agregarFila()" style="flex: 1;">+ Agregar Paciente</button>
+                    <button id="btnCancelarEdit" class="btn-danger" onclick="cancelarEdicion()" style="display: none; padding: 0.625rem;" title="Cancelar Edición">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-top: 2px;">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- COLUMNA DERECHA (70%) -->
         <div class="right-panel">
             <div class="section-card" style="margin-bottom: 0;">
-                <h2 style="text-align: left; margin-bottom: 1.5rem;">Registro Diario</h2>
+                <h2 style="text-align: left; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+                    Registro Diario
+                    <span id="totalRegistros" style="font-size: 1rem; font-weight: 500; color: var(--text-muted); background: var(--border-color); padding: 4px 12px; border-radius: 999px;">Total: 0</span>
+                </h2>
                 <!-- Acciones superior derecha -->
                 <div class="no-print"
                     style="display: flex; gap: 16px; align-items: flex-end; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); flex-wrap: wrap;">
@@ -450,22 +460,32 @@
                         <label>Técnico Responsable:</label>
                         <select id="tecnicoGral"></select>
                     </div>
-                    <button class="btn-print" onclick="imprimirReporte()"
-                        style="margin-top: 0; padding: 0.5rem 1.25rem; font-size: 0.875rem; width: auto; display: flex; align-items: center; gap: 8px;">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path
-                                d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z" />
-                            <path
-                                d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
-                        </svg>
-                        Imprimir Cuadro
-                    </button>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-danger no-print" onclick="borrarTodos()"
+                            style="margin-top: 0; padding: 0.5rem 1.25rem; font-size: 0.875rem; width: auto; display: flex; align-items: center; gap: 8px;" title="Borrar todos los registros">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
+                            Borrar Registros
+                        </button>
+                        <button class="btn-print" onclick="imprimirReporte()"
+                            style="margin-top: 0; padding: 0.5rem 1.25rem; font-size: 0.875rem; width: auto; display: flex; align-items: center; gap: 8px;">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z" />
+                                <path
+                                    d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+                            </svg>
+                            Imprimir Cuadro
+                        </button>
+                    </div>
                 </div>
 
                 <table class="tabla-reporte" id="tablaDatos">
                     <thead>
                         <tr>
-                            <th colspan="15" style="border: none; background: white; padding: 0;">
+                            <th colspan="16" style="border: none; background: white; padding: 0;">
                                 <div class="header-oficial" style="position: relative;">
                                     <p>GOBIERNO DE LA REPÚBLICA DE HONDURAS</p>
                                     <h1>HOSPITAL DR. JUAN MANUEL GÁLVEZ</h1>
@@ -477,6 +497,7 @@
                         </tr>
                         <tr>
                             <th rowspan="2" class="no-print" style="width: 30px;">Acción</th>
+                            <th rowspan="2" style="width: 30px;">#</th>
                             <th rowspan="2">Sala</th>
                             <th rowspan="2">Identidad</th>
                             <th rowspan="2">Nombre del Paciente</th>
@@ -503,7 +524,7 @@
     <script>
         // 1. DATOS QUEMADOS (PARAMETRIZADOS)
         const TECNICOS = [
-            "Técnico 1",
+            "Carlos Interiano",
             "Técnico 2",
             "Técnico 3"
         ];
@@ -538,6 +559,7 @@
             llenarSelect('turnoGral', TURNOS);
             llenarSelect('tecnicoGral', TECNICOS);
             llenarSelect('pSala', SALAS);
+            renderizarTabla();
         };
 
         function llenarSelect(id, array) {
@@ -551,7 +573,13 @@
         }
 
         // 3. LÓGICA DE AGREGADO
-        const registros = [];
+        let registros = JSON.parse(localStorage.getItem('registros')) || [];
+        let editIndex = -1;
+
+        function guardarRegistros() {
+            localStorage.setItem('registros', JSON.stringify(registros));
+            document.getElementById('totalRegistros').innerText = `Total: ${registros.length}`;
+        }
 
         function formatText(text) {
             if (!text) return "";
@@ -581,22 +609,104 @@
                 p8: document.getElementById('p8').value
             };
 
-            registros.push(registro);
+            if (editIndex >= 0) {
+                registros[editIndex] = registro;
+                cancelarEdicion(); // Resetear el estado de edición y UI
+            } else {
+                registros.push(registro);
+            }
+            
+            guardarRegistros();
             renderizarTabla();
             resetForm();
         }
 
         function borrarFila(index) {
-            registros.splice(index, 1);
-            renderizarTabla();
+            if(confirm('¿Desea borrar este registro?')) {
+                registros.splice(index, 1);
+                if (editIndex === index) {
+                    cancelarEdicion();
+                } else if (editIndex > index) {
+                    editIndex--; // Adjust index if a previous row is deleted
+                }
+                guardarRegistros();
+                renderizarTabla();
+            }
+        }
+
+        function borrarTodos() {
+            if (registros.length === 0) return;
+            if(confirm('¿Está seguro de que desea borrar todos los registros? Esta acción no se puede deshacer.')) {
+                registros = [];
+                cancelarEdicion();
+                guardarRegistros();
+                renderizarTabla();
+            }
+        }
+
+        function editarFila(index) {
+            const r = registros[index];
+            document.getElementById('pSala').value = r.sala || '';
+            document.getElementById('pIdentidad').value = r.identidad || '';
+            document.getElementById('pNombre').value = r.nombre || '';
+            document.getElementById('pEstudio').value = r.estudio || '';
+            
+            if (r.edad) {
+                const parts = r.edad.split(' ');
+                document.getElementById('pEdad').value = parts[0] || '';
+                document.getElementById('pUnidadEdad').value = parts[1] || 'Años';
+            } else {
+                document.getElementById('pEdad').value = '';
+                document.getElementById('pUnidadEdad').value = 'Años';
+            }
+            
+            document.getElementById('pMedico').value = r.medico || '';
+            document.getElementById('tecnicoGral').value = r.tecnico || document.getElementById('tecnicoGral').options[0].value;
+            document.getElementById('pObs').value = r.obs || '';
+            document.getElementById('p17').value = r.p17 || '0';
+            document.getElementById('p10').value = r.p10 || '0';
+            document.getElementById('p8').value = r.p8 || '0';
+            
+            editIndex = index;
+            const btn = document.getElementById('btnAgregar');
+            btn.innerText = 'Actualizar Paciente';
+            btn.style.backgroundColor = 'var(--primary)';
+            document.getElementById('btnCancelarEdit').style.display = 'block';
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function cancelarEdicion() {
+            editIndex = -1;
+            const btn = document.getElementById('btnAgregar');
+            btn.innerText = '+ Agregar Paciente';
+            btn.style.backgroundColor = 'var(--success)';
+            document.getElementById('btnCancelarEdit').style.display = 'none';
+            resetForm();
         }
 
         function renderizarTabla() {
             const tbody = document.querySelector('#tablaDatos tbody');
             tbody.innerHTML = "";
+            
+            // Actualizar total (por si acaso)
+            document.getElementById('totalRegistros').innerText = `Total: ${registros.length}`;
+            
             registros.forEach((r, index) => {
                 const fila = `<tr>
-                <td class="no-print"><button onclick="borrarFila(${index})" class="btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" title="Borrar registro">X</button></td>
+                <td class="no-print" style="white-space: nowrap; padding: 4px;">
+                    <button onclick="editarFila(${index})" style="background-color: var(--primary); padding: 0.25rem 0.4rem; font-size: 0.75rem; margin-right: 2px;" title="Editar registro">
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                        </svg>
+                    </button>
+                    <button onclick="borrarFila(${index})" class="btn-danger" style="padding: 0.25rem 0.4rem; font-size: 0.75rem;" title="Borrar registro">
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </td>
+                <td>${index + 1}</td>
                 <td class="text-left-print">${r.sala}</td>
                 <td class="text-left-print">${r.identidad}</td>
                 <td class="text-left-print">${r.nombre}</td>

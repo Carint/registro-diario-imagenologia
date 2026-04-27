@@ -9,13 +9,16 @@
 
 ## 📌 Propósito
 
-A diferencia de un sistema de base de datos o registro electrónico tradicional (donde se almacenan los datos a largo plazo), esta aplicación es una **utilidad de formato en tiempo real**. Su único objetivo es facilitar al técnico de turno la captura rápida de la información de los pacientes y generar un cuadro físico perfectamente tabulado para imprimir y archivar. 
+A diferencia de un sistema de base de datos o registro electrónico tradicional en la nube, esta aplicación es una **utilidad de formato en tiempo real con persistencia local**. Su principal objetivo es facilitar al técnico de turno la captura rápida de la información de los pacientes y generar un cuadro físico perfectamente tabulado para imprimir y archivar. 
 
-Al cerrar la pestaña del navegador, **ningún dato se guarda ni se almacena**, garantizando así una herramienta liviana, libre de instalaciones y completamente segura respecto a la privacidad del paciente.
+Los datos se almacenan temporalmente en la memoria del propio navegador (*Local Storage*), lo que significa que puedes recargar la página o cerrarla por error sin perder el progreso de tu jornada. Sigue siendo una herramienta liviana, libre de instalaciones y segura respecto a la privacidad del paciente, ya que la información no sale del equipo en el que se está usando.
 
 ## ✨ Funcionalidades Principales
 
 * **Interfaz Moderna de Dos Paneles (Split-Layout)**: El área de trabajo se divide inteligentemente entre un formulario lateral (30%) de captura rápida y un panel de previsualización (70%) para los pacientes agregados.
+* **Persistencia Local Automática**: No te preocupes por perder datos si cierras el navegador. Toda la información se guarda automáticamente en tu equipo local, contando con un control para borrar los registros al terminar tu turno.
+* **Edición y Control de Registros**: Permite actualizar de manera fluida los datos de cualquier paciente que ya haya sido ingresado mediante el botón de edición, y muestra visualmente la cantidad total de registros.
+* **Numeración Correlativa Automática**: El sistema asigna secuencialmente un número (#) automático a cada paciente, tanto en la interfaz de usuario como en el documento a imprimir.
 * **Control Inteligente de Texto**: Opción intuitiva para forzar todo el texto capturado a letras MAYÚSCULAS o mantener el formato estándar (Letra Capital), agilizando el llenado libre.
 * **Flujo de Trabajo Ininterrumpido**: El cursor regresa automáticamente al primer campo importante (*Identidad*) tras ingresar a un paciente, permitiendo captar decenas de personas sin tener que volver a usar el ratón.
 * **Formato de Impresión Calibrado Milimétricamente**: El motor interno manipula el CSS de impresión (`@media print`) para generar una página perfecta de **330mm x 216mm** exactos, ocultando menús, botones interactivos y reposicionando elementos de encabezado oficial.
